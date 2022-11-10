@@ -15,7 +15,7 @@ exporters:
   logging:
     logLevel: debug
   prometheusremotewrite:
-    endpoint: https://633871:eyJrIjoiYzEwZWFjN2ExYjkyZTBiZjQxMTM5OTI1Njc0MGU5ODNiMzFiYWNmYiIsIm4iOiJtb2ppLW5vZGUtdGVzdCIsImlkIjo3MzY2MDd9@prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+    endpoint: https://<user_id>:<password>@prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
   prometheus:
     endpoint: "localhost:8889"
     # namespace: "default"
@@ -36,7 +36,3 @@ service:
       # exporters: [logging]
       # exporters: [prometheusremotewrite]
       exporters: [prometheus]
-
-
-# Read API-Key: eyJrIjoiYjlhOTZlYjc0MzFlZTBiZWU0ZGM0ZDUyMzg0NjE5OTU0ZGI2ZmVjMSIsIm4iOiJyZWFkLWFwaS1wcm9tZXRoZXVzIiwiaWQiOjczNjYwN30=
-# curl -X GET -k -H 'Content-Type: a_pplication/json' -i 'http://api_key:eyJrIjoiYjlhOTZlYjc0MzFlZTBiZWU0ZGM0ZDUyMzg0NjE5OTU0ZGI2ZmVjMSIsIm4iOiJyZWFkLWFwaS1wcm9tZXRoZXVzIiwiaWQiOjczNjYwN30=@prometheus-prod-01-eu-west-0.grafana.net/api/prom/api/v1/query' --data ''
