@@ -1,0 +1,32 @@
+version: '3.6'
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    network_mode: host
+    # ports:
+    #   - 9000:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+  
+  #----------------#
+
+  otel-collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector
+    command: ["--config=/root/otel-collector/config.yml"]
+    volumes:
+      - ./otel-collector:/root/otel-collector/
+    network_mode: host
+    # ports:
+    #   - "4317:4317"   # grpc receiver
+    #   - "4318:4318"   # http receiver
+    #   - "8989:8989"   # prometheus exporter
+    #   # - "55681:55681"
+
+  #----------------#
+
+volumes:
+  prometheus-data:
