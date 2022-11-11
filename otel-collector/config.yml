@@ -23,7 +23,7 @@ exporters:
     #   label1: value1
     #   'another label': spaced value
     send_timestamps: true
-    metric_expiration: 180m
+    metric_expiration: 1800m
     # resource_to_telemetry_conversion:
     #   enabled: true
 
