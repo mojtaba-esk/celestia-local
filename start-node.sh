@@ -39,11 +39,11 @@ export CELESTIA_CUSTOM=${CHAINID}:${GENESIS_HASH}
 
 celestia ${NODE_TYPE} init --core.ip ${CORE_IP} --core.rpc.port ${CORE_RPC_PORT}
 
-cel-key delete ${NODE_KEY} --node.type ${NODE_TYPE} --keyring-backend "test" --yes
-cel-key add ${NODE_KEY} --node.type ${NODE_TYPE} --keyring-backend "test"
-cel-key list --node.type ${NODE_TYPE} --keyring-backend "test"
+cel-key delete ${NODE_KEY} --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "test" --yes
+cel-key add ${NODE_KEY} --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "test"
+cel-key list --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "test"
 
-EXPORTED_KEY=$(echo "12345678" | cel-key export ${NODE_KEY} --keyring-backend "test" --node.type ${NODE_TYPE} 2>&1)
+EXPORTED_KEY=$(echo "12345678" | cel-key export ${NODE_KEY}  --node.network ${CHAINID} --keyring-backend "test" --node.type ${NODE_TYPE} 2>&1)
 echo "${EXPORTED_KEY}" > nodeKey.txt
 celestia-appd keys delete ${NODE_KEY} --home ${APP_HOME_DIR} --keyring-backend="test" --yes
 echo "12345678" | celestia-appd keys import ${NODE_KEY} nodeKey.txt --home ${APP_HOME_DIR} --keyring-backend="test"
