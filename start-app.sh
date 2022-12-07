@@ -5,6 +5,23 @@ source .env
 
 rm -rf ${APP_HOME_DIR}
 
+if [[ `which celestia-appd` == "" ]] || [[ `celestia-appd version 2>&1 | grep "${APP_VERSION}"` == "" ]]; then
+
+    echo -n "Building the app binary..."
+    
+    rm -rf celestia-app
+    git clone https://github.com/celestiaorg/celestia-app.git
+    cd celestia-app/
+    git checkout tags/${APP_GIT_TAG} -b ${APP_GIT_TAG}
+    make install
+    cd ..
+    rm -rf celestia-app
+
+fi
+
+echo "App Version: " `celestia-appd version 2>&1`
+sleep 1
+
 # Build genesis file incl account for passed address
 coins="1000000000000000${DENOM}"
 celestia-appd init $CHAINID --chain-id $CHAINID --home ${APP_HOME_DIR}
@@ -16,7 +33,7 @@ celestia-appd gentx ${VALIDATOR_KEY} 5000000000${DENOM} \
   --chain-id $CHAINID \
   --home ${APP_HOME_DIR} \
   --orchestrator-address $(celestia-appd keys show ${VALIDATOR_KEY} -a --keyring-backend="test" --home ${APP_HOME_DIR}) \
-  --ethereum-address 0x966e6f22781EF6a6A82BBB4DB3df8E225DfD9488 # private key: da6ed55cb2894ac2c9c10209c09de8e8b9d109b910338d5bf3d747a7e1fc9eb9
+  --evm-address 0x966e6f22781EF6a6A82BBB4DB3df8E225DfD9488 # private key: da6ed55cb2894ac2c9c10209c09de8e8b9d109b910338d5bf3d747a7e1fc9eb9
 
 celestia-appd collect-gentxs --home ${APP_HOME_DIR}
 

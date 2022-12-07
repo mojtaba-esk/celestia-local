@@ -9,7 +9,7 @@ services:
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
-    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.retention.time=3d --storage.tsdb.retention.size=10GB
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.retention.time=30d
   
   #----------------#
 
