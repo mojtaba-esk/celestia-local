@@ -14,7 +14,7 @@ CORE_IP="164.92.245.42"
 CORE_RPC_PORT="26657"
 CORE_GRPC_PORT="9092"
 
-NODE_VERSION="v0.5.0-rc5-28-gfbfd45b"
+NODE_VERSION="v0.5.0"
 NODE_GIT_TAG="v0.5.0"
 NODE_KEY="my_celes_key"
 
@@ -42,7 +42,7 @@ if [[ `which celestia` == "" ]] || [[ `celestia version | grep "Semantic version
     git clone https://github.com/celestiaorg/celestia-node.git
     cd celestia-node/
     git checkout tags/${NODE_GIT_TAG}
-    sudo make install
+    make install
     make install-key
     cd ..
     rm -rf celestia-node
