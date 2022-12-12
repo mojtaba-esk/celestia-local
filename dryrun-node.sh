@@ -12,7 +12,7 @@ KEYRING_BACKEND="os"
 
 CORE_IP="164.92.245.42"
 CORE_RPC_PORT="26657"
-CORE_GRPC_PORT="9092"
+CORE_GRPC_PORT="9090"
 
 NODE_VERSION="v0.5.0"
 NODE_GIT_TAG="v0.5.0"
@@ -59,9 +59,14 @@ export CELESTIA_CUSTOM=${CHAINID}:${GENESIS_HASH}
 
 celestia ${NODE_TYPE} init --core.ip ${CORE_IP} --core.rpc.port ${CORE_RPC_PORT}
 
+# Removed node.netwrok as it gives unknown flag error
 cel-key delete ${NODE_KEY} --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}" --yes
 cel-key add ${NODE_KEY} --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}"
 cel-key list --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}"
+
+# cel-key delete ${NODE_KEY} --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}" --yes
+# cel-key add ${NODE_KEY} --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}"
+# cel-key list --node.type ${NODE_TYPE} --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}"
 
 EXPORTED_KEY=$(echo "12345678" | cel-key export ${NODE_KEY}  --node.network ${CHAINID} --keyring-backend "${KEYRING_BACKEND}" --node.type ${NODE_TYPE} 2>&1)
 echo "${EXPORTED_KEY}" > nodeKey.txt
