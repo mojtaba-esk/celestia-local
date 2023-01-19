@@ -1,5 +1,10 @@
 # A minimal local setup for Celestia
 
+**NOTE:** This repo is not maintained any more, please do not use it. 
+A new version of the bundle can be found here: https://github.com/celestiaorg/celestia-local-docker/
+
+----------
+
 This bundle sets up a local validator, a local bridge node with an Otel collector configured to store node metrics data in a Prometheus instance as DB.
 
 ## Setup
